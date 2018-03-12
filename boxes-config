@@ -62,8 +62,71 @@ elastic (n,e,s,w)
 END c
 
 
+
 # ============================================================================
 
+BOX uvm_info_box
+
+author "surrehma "
+revision "1.0"
+revdate "Thu Jun 29 09:25:45 CEST 2017"
+created "Thu Jun 29 09:25:45 CEST 2017"
+
+sample
+    `uvm_info(uv_header, " ", verbosity)              
+    `uvm_info(uv_header, " ", verbosity)               
+    `uvm_info(uv_header, " ", verbosity)               
+    `uvm_info(uv_header, " ", verbosity)               
+ends
+
+shapes {
+    nw ("`uvm_info(uv_header , \"/*") n ("-") ne (" */\", verbosity)")
+     w ("`uvm_info(uv_header , \" *")          e (" * \", verbosity)")
+    sw ("`uvm_info(uv_header , \" *") s ("-") se (" * \", verbosity)")
+}
+
+delim ?"
+replace "\*/" with "*\/"               # quote closing comment tags
+reverse "\*\\/" to "*/"
+
+padding {
+    horiz 1             # alternatives: all, vert, lef, rig, bottom, top
+}                       # can be combined, e.g. all 3 top 1
+
+elastic (n,e,s,w)
+
+END uvm_info_box
+
+# ============================================================================
+
+BOX uvm_info_line
+
+author "surrehma "
+revision "1.0"
+revdate "Wed Aug  2 15:38:15 CEST 2017"
+created "Wed Aug  2 15:38:15 CEST 2017"
+sample
+    `uvm_info(uv_header, " ", verbosity)              
+    `uvm_info(uv_header, " ", verbosity)               
+    `uvm_info(uv_header, " ", verbosity)               
+    `uvm_info(uv_header, " ", verbosity)               
+ends
+
+shapes {
+     w ("`uvm_info(uv_header , \$sformatf(\"Line:%05d: ")    e("\",`__LINE__ ), verbosity)")
+}
+
+padding {
+    horiz 1             # alternatives: all, vert, lef, rig, bottom, top
+}                       # can be combined, e.g. all 3 top 1
+
+elastic (n,s,e,w)
+#elastic (n,s,e,w)
+
+END uvm_info_line
+
+
+# ============================================================================
 
 BOX parchment
 
